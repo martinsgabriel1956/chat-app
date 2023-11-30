@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db:
+    env_file:
+      - .env
+    image: postgres
+    restart: always
+    volumes:
+      - chat_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - chat_network
+
+volumes:
+  chat_data:
+
+networks:
+  chat_network:
