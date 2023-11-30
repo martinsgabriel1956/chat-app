@@ -1,6 +1,8 @@
-import { type Prisma } from '@prisma/client';
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 
+@Injectable()
 export class UsersRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
@@ -9,7 +11,6 @@ export class UsersRepository {
   }
 
   findUnique(findUniqueDto: Prisma.UserFindUniqueArgs) {
-    console.log({ user: this.prismaService });
     return this.prismaService.user.findUnique({
       where: findUniqueDto.where,
       select: findUniqueDto.select,

@@ -19,8 +19,6 @@ export class AuthService {
   async signIn(signInDTO: SignInDTO) {
     const { email, password } = signInDTO;
 
-    console.log({ email, password });
-
     const user = await this.userRepository.findUnique({
       where: {
         email,
@@ -49,27 +47,23 @@ export class AuthService {
       select: { id: true },
     });
 
-    console.log({ emailTaken });
-
     if (emailTaken) {
       throw new ConflictException('This e-mail is already in use.');
     }
 
-    // const hashedPassword = await hash(password, 12);
+    const hashedPassword = await hash(password, 12);
 
-    // console.log({ hashedPassword });
+    const user = await this.userRepository.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
 
-    // const user = await this.userRepository.create({
-    //   data: {
-    //     name,
-    //     email,
-    //     password: hashedPassword,
-    //   },
-    // });
+    const accessToken = await this.generateAccessToken(user.id);
 
-    // const accessToken = await this.generateAccessToken(user.id);
-
-    // return { accessToken };
+    return { accessToken };
   }
 
   private generateAccessToken(userId: string) {
