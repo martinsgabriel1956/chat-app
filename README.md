@@ -22,7 +22,8 @@
 - React Query
 - Zustand
 - React Hook Form
-- zod
+- Zod
+- Radix UI
 
 ## :memo: Licença
 
