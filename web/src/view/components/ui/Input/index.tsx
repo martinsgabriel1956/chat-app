@@ -1,16 +1,19 @@
 import * as React from "react"
 import { cn } from "@/shared/lib/utils"
-import { ShowPasswordButton } from "../ShowPasswordButton";
+import { ShowPasswordButton } from "../Button/ShowPasswordButton";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText?: string
+  error: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, labelText, ...props }, ref) => {
+  ({ className, type, labelText, error, ...props }, ref) => {
     const isPasswordType = type === "password";
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
+    const errorMessage = error?.message;
 
     const whenShowPassword = () => {
       if (isPasswordType) {
@@ -46,6 +49,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               setShowPassword={setShowPassword}
             />
           )}
+        </div>
+
+        <div className="">
+          <span className="text-sm text-red-500">
+            {error && `${errorMessage}`}
+          </span>
         </div>
       </div>
     )

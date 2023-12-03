@@ -4,7 +4,6 @@ import { Check } from "lucide-react"
 import { cn } from "@/shared/lib/utils"
 
 type CheckboxElement = React.ElementRef<typeof CheckboxPrimitive.Root>
-
 interface CheckboxProps extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
   labelText?: string
 }

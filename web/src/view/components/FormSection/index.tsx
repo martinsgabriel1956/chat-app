@@ -1,19 +1,28 @@
 import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
-import { Checkbox } from "@/view/components/ui/Checkbox";
-import { Button } from "../ui/Button";
+import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
+import { Button, Checkbox } from "@/view/components/ui";
 
 interface FormSectionProps {
   title: string;
   subtitle?: string;
-  textButton: string;
   children: ReactNode;
+  formOptions: {
+    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>
+    onSubmit: (data: any) => void
+  }
 }
 
-export function FormSection({ title, subtitle, children, textButton, }: FormSectionProps) {
+enum ButtonText {
+  login = "Sign In",
+  register = "Sign Up",
+}
+
+export function FormSection({ title, subtitle, children, formOptions: { handleSubmit, onSubmit } }: FormSectionProps) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
+  const textButton = ButtonText[pathname?.replace("/", "") as keyof typeof ButtonText]
 
   return (
     <section className="flex flex-col items-center justify-center bg-slate-50 w-full h-screen">
@@ -23,7 +32,9 @@ export function FormSection({ title, subtitle, children, textButton, }: FormSect
           {isLoginPage && <p className="text-sm text-slate-600">{subtitle}</p>}
         </div>
 
-        <form>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+        >
           {children}
 
           {isLoginPage && (
@@ -44,8 +55,9 @@ export function FormSection({ title, subtitle, children, textButton, }: FormSect
 
           <div className="w-full mb-12">
             <Button
-              variant="disabled"
-              disabled
+              variant="default"
+              type="submit"
+            // disabled
             >
               {textButton}
             </Button>

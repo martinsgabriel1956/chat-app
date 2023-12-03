@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Eye, EyeSlash } from '@phosphor-icons/react';
 
 interface ShowPasswordButtonProps {
@@ -7,7 +6,6 @@ interface ShowPasswordButtonProps {
 }
 
 export function ShowPasswordButton({ setShowPassword, showPassword }: ShowPasswordButtonProps) {
-
   function handleTogglePasswordVisibility() {
     setShowPassword(prevState => !prevState);
   }
