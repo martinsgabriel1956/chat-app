@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cn } from "@/shared/lib/utils";
 
-type ToastActionElement = React.ElementRef<typeof ToastPrimitives.Action>
+export type ToastActionElement = React.ElementRef<typeof ToastPrimitives.Action>
 type ToastActionProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>
 
 const ToastAction = React.forwardRef<

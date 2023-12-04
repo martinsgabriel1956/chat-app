@@ -1,19 +1,11 @@
-import { useForm } from "react-hook-form";
 import { FormSection } from "@/view/components/FormSection";
 import { HeroSection } from "@/view/components/HeroSection";
 import { Input } from "@/view/components/ui/Input";
 import { AuthLayout } from "@/view/layout/auth-layout";
-import { useContext } from "react";
-import { AuthContext } from "@/shared/contexts/auth-context";
+import { UseLogin } from "@/shared/hooks/useLogin";
 
 export default function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const { handleLogin } = useContext(AuthContext);
-
-  const formOptions = {
-    handleSubmit,
-    onSubmit: handleLogin,
-  }
+  const { errors, register, handleSubmit } = UseLogin();
 
   return (
     <AuthLayout
@@ -22,7 +14,7 @@ export default function Login() {
       <FormSection
         title="Welcome back"
         subtitle="Welcome back! Please enter your details."
-        formOptions={formOptions}
+        handleSubmit={handleSubmit}
       >
         <div className="flex flex-col justify-center gap-8">
           <Input

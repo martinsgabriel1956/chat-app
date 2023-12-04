@@ -1,17 +1,13 @@
-import { ReactNode } from "react";
+import { BaseSyntheticEvent, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import Link from 'next/link';
-import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
 import { Button, Checkbox } from "@/view/components/ui";
 
 interface FormSectionProps {
   title: string;
   subtitle?: string;
   children: ReactNode;
-  formOptions: {
-    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>
-    onSubmit: (data: any) => void
-  }
+  handleSubmit: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
 }
 
 enum ButtonText {
@@ -19,7 +15,7 @@ enum ButtonText {
   register = "Sign Up",
 }
 
-export function FormSection({ title, subtitle, children, formOptions: { handleSubmit, onSubmit } }: FormSectionProps) {
+export function FormSection({ title, subtitle, children, handleSubmit }: FormSectionProps) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login";
   const textButton = ButtonText[pathname?.replace("/", "") as keyof typeof ButtonText]
@@ -33,7 +29,7 @@ export function FormSection({ title, subtitle, children, formOptions: { handleSu
         </div>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit}
         >
           {children}
 

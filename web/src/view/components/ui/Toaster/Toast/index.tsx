@@ -2,10 +2,10 @@ import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { type VariantProps } from "class-variance-authority"
 import { cn } from "@/shared/lib/utils"
-import { toastVariants } from "@/view/components/ui/Toast/utils/toast-variants"
+import { toastVariants } from "@/view/components/ui/Toaster/utils/toast-variants"
 
 type ToastElement = React.ElementRef<typeof ToastPrimitives.Root>
-type ToastProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
+export type ToastProps = React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
   VariantProps<typeof toastVariants>
 
 const Toast = React.forwardRef<

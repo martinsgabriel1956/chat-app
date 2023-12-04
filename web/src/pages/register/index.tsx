@@ -1,19 +1,11 @@
-import { useForm, useFormContext } from 'react-hook-form';
 import { FormSection } from "@/view/components/FormSection";
 import { HeroSection } from "@/view/components/HeroSection";
 import { Input } from "@/view/components/ui/Input";
 import { AuthLayout } from "@/view/layout/auth-layout";
-import { useContext } from 'react';
-import { AuthContext } from '@/shared/contexts/auth-context';
+import { UseRegister } from '../../shared/hooks/useRegister';
 
 export default function Register() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const { handleRegisterUser } = useContext(AuthContext);
-
-  const formOptions = {
-    handleSubmit,
-    onSubmit: handleRegisterUser
-  }
+  const { errors, handleSubmit, register } = UseRegister();
 
   return (
     <AuthLayout
@@ -21,7 +13,7 @@ export default function Register() {
     >
       <FormSection
         title="Create account"
-        formOptions={formOptions}
+        handleSubmit={handleSubmit}
       >
         <div className="flex flex-col justify-center gap-6 mb-12">
           <Input
