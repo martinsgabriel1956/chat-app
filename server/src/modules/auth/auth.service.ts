@@ -37,6 +37,8 @@ export class AuthService {
 
     const accessToken = await this.generateAccessToken(user.id);
 
+    await this.userRepository.changeStatus(user.id, 'ONLINE');
+
     return { accessToken };
   }
   async signUp(signUpDTO: SignUpDTO) {
