@@ -10,10 +10,29 @@ export class UsersRepository {
     return this.prismaService.user.create(createUserDTO);
   }
 
+  findMany(findManyDto: Prisma.UserFindManyArgs) {
+    return this.prismaService.user.findMany(findManyDto);
+  }
+
   findUnique(findUniqueDto: Prisma.UserFindUniqueArgs) {
     return this.prismaService.user.findUnique({
       where: findUniqueDto.where,
       select: findUniqueDto.select,
+    });
+  }
+
+  update(updateUserDTO: Prisma.UserUpdateArgs) {
+    return this.prismaService.user.update(updateUserDTO);
+  }
+
+  changeStatus(userId: string, status: 'ONLINE' | 'OFFLINE') {
+    return this.prismaService.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        status,
+      },
     });
   }
 }
