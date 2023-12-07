@@ -41,13 +41,13 @@ model Message {
 }
 
 model Chat {
-  id        String    @id @default(uuid())
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  userId    String
-  user      User?     @relation(fields: [userId], references: [id])
-  messages  Message[]
+  id         String    @id @default(uuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  userId     String
+  friendName String
+  user       User?     @relation(fields: [userId], references: [id])
+  messages   Message[]
 
   @@map("chats")
 }

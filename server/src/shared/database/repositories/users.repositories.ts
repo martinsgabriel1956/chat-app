@@ -14,6 +14,10 @@ export class UsersRepository {
     return this.prismaService.user.findMany(findManyDto);
   }
 
+  findFirst(findFirstDto: Prisma.UserFindFirstArgs) {
+    return this.prismaService.user.findFirst(findFirstDto);
+  }
+
   findUnique(findUniqueDto: Prisma.UserFindUniqueArgs) {
     return this.prismaService.user.findUnique({
       where: findUniqueDto.where,

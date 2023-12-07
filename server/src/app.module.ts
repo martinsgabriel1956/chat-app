@@ -4,13 +4,14 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
-import { MessagesModule } from './modules/messages/messages.module';
+import { MessageModule } from './modules/messages/message.module';
 import { UserModule } from './modules/user/user.module';
 import { DatabaseModule } from './shared/database/database.module';
 import { AuthGuard } from './modules/auth/auth.guard';
+import { ChatModule } from './modules/chat/chat.module';
 
 @Module({
-  imports: [AuthModule, DatabaseModule, MessagesModule, UserModule],
+  imports: [AuthModule, DatabaseModule, MessageModule, UserModule, ChatModule],
   controllers: [AppController],
   providers: [
     AppService,
